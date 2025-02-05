@@ -1,0 +1,40 @@
+# 配置文件
+modules:
+  login: enabled
+  crawler: enabled
+  analyzer: enabled
+  intercept: disabled  # 默认禁用敏感功能
+
+settings:
+  request_interval: 5  # 请求间隔秒数
+  max_retries: 3
+  proxy_enabled: false 
+
+# 新增配置项
+monitoring:
+  prometheus_port: 9090
+  grafana_dashboard: enabled
+
+tracing:
+  jaeger_endpoint: "http://localhost:14268/api/traces"
+
+task:
+  max_concurrency: 10
+  priority_levels: 3
+  model_update_interval: 3600  # 模型更新间隔(秒) 
+
+# 新增安全配置
+security:
+  fernet_key: "your_fernet_key_here"  # 生成命令：python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key())"
+  encryption_enabled: true
+  sensitive_fields: ["password", "api_key"] 
+
+# 新增日志和队列配置
+logging:
+  config_file: "logging.conf"
+  level: "INFO"
+
+redis:
+  host: "localhost"
+  port: 6379
+  priority_queues: ["high", "medium", "low"] 
